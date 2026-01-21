@@ -50,3 +50,29 @@ docker-compose up --build -d
 - **无限撤销**：支持 Ctrl+Z 或 U 键无限回退。
 - **关卡系统**：内置简单/中等/困难三个关卡。
 - **精美 UI**：深色玻璃态风格，视觉体验极佳。
+
+## 🏗️ 项目架构
+
+```
+frontend-user/src/
+├── components/          # UI 组件
+│   ├── GameBoard.vue       # 游戏地图
+│   ├── GameControls.vue    # PC控制面板
+│   ├── GameHeader.vue      # 移动端顶栏
+│   ├── GameOverlay.vue     # 胜利弹窗
+│   ├── LevelSelector.vue   # 关卡选择
+│   └── MobileControls.vue  # 移动端控制
+├── composables/         # 逻辑层
+│   └── useGame.js          # 游戏核心逻辑
+├── data/                # 数据层
+│   └── levels.js           # 关卡配置
+└── App.vue              # 主布局容器
+```
+
+## ⌨️ 操作方式
+
+| 操作 | PC 端         | 移动端   |
+| :--- | :------------ | :------- |
+| 移动 | WASD / 方向键 | 方向按钮 |
+| 撤销 | Ctrl+Z / U    | 撤销按钮 |
+| 重置 | R             | 重置按钮 |
