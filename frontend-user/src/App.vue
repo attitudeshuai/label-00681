@@ -9,6 +9,7 @@ import GameBoard from './components/GameBoard.vue'
 import GameControls from './components/GameControls.vue'
 import MobileControls from './components/MobileControls.vue'
 import GameOverlay from './components/GameOverlay.vue'
+import Leaderboard from './components/Leaderboard.vue'
 
 // 使用游戏逻辑 Composable
 const {
@@ -31,10 +32,20 @@ const {
 
 // UI 状态
 const showSettings = ref(false)
+const showLeaderboardModal = ref(false)
 
 // 切换设置面板
 const toggleSettings = () => {
   showSettings.value = !showSettings.value
+}
+
+// 显示/隐藏排行榜
+const handleShowLeaderboard = () => {
+  showLeaderboardModal.value = true
+}
+
+const handleCloseLeaderboard = () => {
+  showLeaderboardModal.value = false
 }
 
 // 选关包装
@@ -129,11 +140,20 @@ onUnmounted(() => {
               :isGameWon="isGameWon" 
               :steps="steps" 
               :hasNextLevel="currentLevelIndex < LEVELS.length - 1"
+              :currentLevelIndex="currentLevelIndex"
               @reset="resetLevel" 
-              @nextLevel="nextLevel" 
+              @nextLevel="nextLevel"
+              @showLeaderboard="handleShowLeaderboard"
             />
           </template>
         </GameBoard>
+
+        <!-- 排行榜弹窗 -->
+        <Leaderboard 
+          :visible="showLeaderboardModal" 
+          :currentLevelIndex="currentLevelIndex"
+          @close="handleCloseLeaderboard"
+        />
 
         <!-- 移动端底部控制区 -->
          <MobileControls 
