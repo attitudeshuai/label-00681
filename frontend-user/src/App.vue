@@ -126,9 +126,11 @@ onUnmounted(() => {
         <GameBoard :gameMap="gameMap">
           <template #overlay>
             <GameOverlay 
+              :key="currentLevelIndex"
               :isGameWon="isGameWon" 
               :steps="steps" 
               :hasNextLevel="currentLevelIndex < LEVELS.length - 1"
+              :levelIndex="currentLevelIndex"
               @reset="resetLevel" 
               @nextLevel="nextLevel" 
             />
